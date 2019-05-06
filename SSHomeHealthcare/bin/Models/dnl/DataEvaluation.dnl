@@ -1,0 +1,60 @@
+//Declaração de tipos de dados!
+A HumanData has a value!
+the range of HumanData's value is Float!
+
+A HumanState has a value!
+the range of HumanState's value is Integer!
+
+A PreviousState has a value!
+the range of PreviousState's value is Boolean!
+
+//Variável de instância respectiva!
+use estructuredData with type HumanData!
+use personState with type HumanState!
+use prevState with type PreviousState!
+
+//Porta de entrada!
+accepts input on HumanData with type HumanData!
+//enrivonment!
+//sense!
+//Porta de saida!
+generates output on HumanState with type HumanState!
+
+Initialize variables
+<%
+personState = new HumanState(new Integer(0));
+prevState = new PreviousState(false);
+%>! 
+
+//Maquina de Estados!
+to start passivate in s0!
+when in s0 and receive HumanData go to s1!
+hold in s1 for time 1!
+after s1 output HumanState!
+from s1 go to s0!
+
+//Evento de Entrada!
+external event for s0 with HumanData
+<%
+boolean fever;
+estructuredData = (HumanData) messageList.get(0).getData();
+if(estructuredData.getValue() > 40){
+	personState = new HumanState(new Integer(1));
+	fever = true;
+}else{
+	personState = new HumanState(new Integer(0));
+	fever = false;
+}
+
+if (prevState.isValue() == fever){
+	holdIn("s0", 1000.0000);	
+}else{
+	prevState = new PreviousState(fever);	
+}
+
+%>!
+//On the transition going out from the state,perform the actions
+output event for s1
+<%
+output.add(outHumanState, personState);
+%>!

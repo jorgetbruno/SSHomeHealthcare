@@ -1,0 +1,52 @@
+//Declaração de tipos de dados!
+A Temperature has a value!
+the range of Temperature's value is Float!
+
+A HumanData has a value!
+the range of HumanData's value is Float!
+
+//Variável de instância respectiva!
+use measuredTemp with type Temperature!
+use estructuredData with type HumanData!
+
+//Porta de entrada!
+accepts input on Temperature with type Temperature!
+accepts input on HumanData with type HumanData!
+//enrivonment!
+//sense!
+//Porta de saida!
+generates output on Temperature with type Temperature!
+generates output on HumanData with type HumanData!
+ 
+
+//Maquina de Estados!
+to start passivate in s0!
+when in s0 and receive Temperature go to s1!
+hold in s1 for time 1!
+after s1 output Temperature!
+from s1 go to s2!
+passivate in s2!
+when in s2 and receive HumanData go to s3!
+hold in s3 for time 1!
+after s3 output HumanData!
+from s3 go to s0!
+
+//Evento de Entrada!
+external event for s0 with Temperature
+<%
+measuredTemp = (Temperature) messageList.get(0).getData();
+%>!
+external event for s2 with HumanData
+<%
+estructuredData = (HumanData) messageList.get(0).getData();
+%>!
+//On the transition going out from the state,perform the actions
+output event for s1
+<%
+output.add(outTemperature, measuredTemp);
+%>!
+
+output event for s3
+<%
+output.add(outHumanData, estructuredData);
+%>!

@@ -1,0 +1,31 @@
+//Declaração de tipos de dados!
+A HumanState has a value!
+the range of HumanState's value is Integer!
+
+//Variável de instância respectiva!
+use personState with type HumanState!
+
+//Porta de entrada!
+accepts input on HumanState with type HumanState!
+//enrivonment!
+//sense!
+//Porta de saida!
+generates output on HumanState with type HumanState!
+
+//Maquina de Estados!
+to start passivate in s0!
+when in s0 and receive HumanState go to s1!
+hold in s1 for time 1!
+after s1 output HumanState!
+from s1 go to s0!
+
+//Evento de Entrada!
+external event for s0 with HumanState
+<%
+personState = (HumanState) messageList.get(0).getData();
+%>!
+//On the transition going out from the state,perform the actions
+output event for s1
+<%
+output.add(outHumanState, personState);
+%>!

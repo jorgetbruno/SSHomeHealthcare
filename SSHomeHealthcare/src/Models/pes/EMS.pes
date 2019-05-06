@@ -1,0 +1,4 @@
+set name of model as EMS !
+pruned from EMS.ses !
+mergeAll from EMS.ses !
+write class files !

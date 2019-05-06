@@ -1,0 +1,35 @@
+//Declaração de tipos de dados!
+A Temperature has a value!
+the range of Temperature's value is Float!
+
+//Variável de instância respectiva!
+use CurrentTemp with type Temperature!
+
+//Porta de saida!
+generates output on Temperature with type Temperature!
+
+
+//Inicialização de Variáveis!
+Internal event for s0
+<%
+float max = 44;
+float min = 35;
+java.util.Random gerador = new java.util.Random();
+float numero1 = gerador.nextFloat() * (max - min) + min;
+CurrentTemp = new Temperature(numero1);
+%>!
+
+
+//Maquina de estados!
+to start hold in s0 for time 1!
+from s0 go to s1!
+hold in s1 for time 1!
+after s1 output Temperature!
+from s1 go to s0!
+
+//Evento de Saida!
+//On the transition going out from the state s0, perform the actions!
+output event for s1
+<%
+output.add(outTemperature, CurrentTemp);
+%>!
