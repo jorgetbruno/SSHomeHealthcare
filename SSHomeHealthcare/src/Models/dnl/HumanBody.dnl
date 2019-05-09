@@ -2,11 +2,17 @@
 A Temperature has a value!
 the range of Temperature's value is Float!
 
+//Declaração de tipos de dados!
+A Axis has a value!
+the range of Axis's value is Integer!
+
 //Variável de instância respectiva!
 use CurrentTemp with type Temperature!
+use humanAxis with type Axis!
 
 //Porta de saida!
 generates output on Temperature with type Temperature!
+generates output on Axis with type Axis!
 
 
 //Inicialização de Variáveis!
@@ -19,17 +25,29 @@ float numero1 = gerador.nextFloat() * (max - min) + min;
 CurrentTemp = new Temperature(numero1);
 %>!
 
+Internal event for s2
+<%
+humanAxis = new Axis(0);
+%>!
 
 //Maquina de estados!
 to start hold in s0 for time 1!
 from s0 go to s1!
 hold in s1 for time 1!
 after s1 output Temperature!
-from s1 go to s0!
+from s1 go to s2!
+hold in s2 for time 1!
+after s2 output Axis!
+from s2 go to s1!
 
 //Evento de Saida!
 //On the transition going out from the state s0, perform the actions!
 output event for s1
 <%
 output.add(outTemperature, CurrentTemp);
+%>!
+
+output event for s2
+<%
+output.add(outAxis, humanAxis);
 %>!

@@ -41,7 +41,7 @@ estructuredData = (HumanData) messageList.get(0).getData();
 external event for s4 with HumanState
 <%
 temporaryState = (HumanState) messageList.get(0).getData();
-if(personState == temporaryState){
+if(temporaryState.getValue() < 36.6){
 	 passivateIn("s0");
 }
 

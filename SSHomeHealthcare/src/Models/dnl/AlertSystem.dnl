@@ -1,14 +1,16 @@
 //Declaração de tipos de dados!
 A HumanState has a value!
 the range of HumanState's value is Integer!
+A DistressSignal has a value!
+the range of DistressSignal's value is Integer!
 
 //Variável de instância respectiva!
 use personState with type HumanState!
+use distress with type DistressSignal!
 
 //Porta de entrada!
 accepts input on HumanState with type HumanState!
-//enrivonment!
-//sense!
+
 //Porta de saida!
 generates output on HumanState with type HumanState!
 

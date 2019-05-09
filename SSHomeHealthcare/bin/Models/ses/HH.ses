@@ -1,15 +1,25 @@
-From the top perspective, HH is made of AcquisitionSystem, DataStructureSystem, DataInterpretationSystem, and AlertSystem!
+From the top perspective, HH is made of AcquisitionSystem, DataStructureSystem, DataInterpretationSystem,  AlertSystem, and EmergencySystem!
 
 //Composicao do Sistema em diferentes perspectivas!
-From the Acquisition perspective, AcquisitionSystem is made of HumanBody, Sensor, and Gateway!
+From the Acquisition perspective, AcquisitionSystem is made of HumanBody and CollectionVest!
+From the Collection perspective, CollectionVest is made of SensorTemperatura, AccelerometerLeft, AccelerometerRight, and Gateway!
 From the DataStructure perspective, DataStructureSystem is made of FeatureExtractor!
 From the DataInterpretation perspective, DataInterpretationSystem is made of DataEvaluation!
 From the Alert perspective, AlertSystem is made of Caretaker!
+From the Emergency perspective, EmergencySystem is made of Helpcenter and Ambulance!
+
 
 //Sistema que obtem as informações!
-From the Acquisition perspective, HumanBody sends Temperature to Sensor!
-From the Acquisition perspective, Sensor sends Temperature to Gateway!
-From the Acquisition perspective, Gateway sends Temperature to AcquisitionSystem!
+From the Acquisition perspective, HumanBody sends Temperature to CollectionVest!
+From the Acquisition perspective, HumanBody sends Axis to CollectionVest!
+From the Collection perspective, CollectionVest sends Temperature to SensorTemperatura!
+From the Collection perspective, CollectionVest sends Axis to AccelerometerLeft!
+From the Collection perspective, CollectionVest sends Axis to AccelerometerRight!
+From the Collection perspective, SensorTemperatura sends Temperature to Gateway!
+From the Collection perspective, AccelerometerLeft sends Axis to Gateway!
+From the Collection perspective, AccelerometerRight sends Axis to Gateway!
+From the Collection perspective, Gateway sends Temperature to CollectionVest!
+From the Acquisition perspective, CollectionVest sends Temperature to AcquisitionSystem!
 From the top perspective, AcquisitionSystem sends Temperature to DataStructureSystem!
 
 //Sistema que estrutura as informações!
@@ -24,3 +34,8 @@ From the top perspective, DataInterpretationSystem sends HumanState to AlertSyst
 
 //Sistema que alerta os responsaveis!
 From the Alert perspective, AlertSystem sends HumanState to Caretaker!
+//From the top perspective, AlertSystem sends HumanState to EmergencySystem!
+
+//Sistema de emergencia!
+From the Emergency perspective, EmergencySystem sends HumanState to Helpcenter!
+From the Emergency perspective, Helpcenter sends HumanState to Ambulance!

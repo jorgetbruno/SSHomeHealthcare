@@ -1,10 +1,14 @@
 //Declaração de tipos de dados!
 A Temperature has a value!
 the range of Temperature's value is Float!
+//Declaração de tipos de dados!
+A Axis has a value!
+the range of Axis's value is Integer!
 
 
 //Variável de instância respectiva!
 use humanTemp with type Temperature!
+use humanAxis with type Axis!
 
 
 //Porta de entrada!
@@ -13,11 +17,13 @@ accepts input on Temperature with type Temperature! //environment //sense
 //Maquina de estados!
 to start passivate in s0!
 when in s0 and receive Temperature go to s1!
-hold in s1 for time 1!
+hold in s1 for time 0.5!
+after s1 output Temperature!
 from s1 go to s2!
-hold in s2 for time 1!
-after s2 output Temperature!
-from s2 go to s0!
+passivate in s2!
+when in s2 and receive Axis go to s3!
+hold in s3 for time 1!
+from s3 go to s0!
 
 external event for s0 with Temperature
 <%
@@ -28,7 +34,14 @@ System.out.println("Value: " + value);
 }
 %>!
 
-output event for s2
+external event for s0 with Temperature
+<%
+for(int i = 0; i < messageList.size(); i++){
+humanAxis = (Axis)messageList.get(i).getData();
+}
+%>!
+
+output event for s1
 <%
 output.add(outTemperature, humanTemp);
 %>!
