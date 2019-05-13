@@ -1,40 +1,43 @@
-From the top perspective, HH is made of AcquisitionSystem, DataStructureSystem, DataInterpretationSystem,  AlertSystem, and EmergencySystem!
+From the top perspective, HH is made of AcquisitionLayer, ModelingLayer, ReasoningLayer,  DisseminationLayer, and EmergencySystem!
 
 //Composicao do Sistema em diferentes perspectivas!
-From the Acquisition perspective, AcquisitionSystem is made of HumanBody and CollectionVest!
-From the Collection perspective, CollectionVest is made of SensorTemperatura, AccelerometerLeft, AccelerometerRight, and Gateway!
-From the DataStructure perspective, DataStructureSystem is made of FeatureExtractor!
-From the DataInterpretation perspective, DataInterpretationSystem is made of DataEvaluation!
-From the Alert perspective, AlertSystem is made of Caretaker!
+From the Acquisition perspective, AcquisitionLayer is made of HumanBody and CollectionVest!
+From the Collection perspective, CollectionVest is made of TemperatureSensor, AccelerometerLeft, AccelerometerRight, and Gateway!
+From the DataStructure perspective, ModelingLayer is made of FeatureExtractor!
+From the DataInterpretation perspective, ReasoningLayer is made of DataEvaluation!
+From the Alert perspective, DisseminationLayer is made of AlertSystem and Caretaker!
 From the Emergency perspective, EmergencySystem is made of Helpcenter and Ambulance!
 
 
 //Sistema que obtem as informações!
 From the Acquisition perspective, HumanBody sends Temperature to CollectionVest!
 From the Acquisition perspective, HumanBody sends Axis to CollectionVest!
-From the Collection perspective, CollectionVest sends Temperature to SensorTemperatura!
+From the Collection perspective, CollectionVest sends Temperature to TemperatureSensor!
 From the Collection perspective, CollectionVest sends Axis to AccelerometerLeft!
 From the Collection perspective, CollectionVest sends Axis to AccelerometerRight!
-From the Collection perspective, SensorTemperatura sends Temperature to Gateway!
+From the Collection perspective, TemperatureSensor sends Temperature to Gateway!
 From the Collection perspective, AccelerometerLeft sends Axis to Gateway!
 From the Collection perspective, AccelerometerRight sends Axis to Gateway!
 From the Collection perspective, Gateway sends Temperature to CollectionVest!
-From the Acquisition perspective, CollectionVest sends Temperature to AcquisitionSystem!
-From the top perspective, AcquisitionSystem sends Temperature to DataStructureSystem!
+From the Acquisition perspective, CollectionVest sends Temperature to AcquisitionLayer!
+From the top perspective, AcquisitionLayer sends Temperature to ModelingLayer!
 
 //Sistema que estrutura as informações!
-From the DataStructure perspective, DataStructureSystem sends Temperature to FeatureExtractor!
-From the DataStructure perspective, FeatureExtractor sends HumanData to DataStructureSystem!
-From the top perspective, DataStructureSystem sends HumanData to DataInterpretationSystem!
+From the DataStructure perspective, ModelingLayer sends Temperature to FeatureExtractor!
+From the DataStructure perspective, FeatureExtractor sends HumanData to ModelingLayer!
+From the top perspective, ModelingLayer sends HumanData to ReasoningLayer!
 
 //Sistema que interpreta as informações!
-From the DataInterpretation perspective, DataInterpretationSystem sends HumanData to DataEvaluation!
-From the DataInterpretation perspective, DataEvaluation sends HumanState to DataInterpretationSystem!
-From the top perspective, DataInterpretationSystem sends HumanState to AlertSystem!
+From the DataInterpretation perspective, ReasoningLayer sends HumanData to DataEvaluation!
+From the DataInterpretation perspective, DataEvaluation sends HumanState to ReasoningLayer!
+From the top perspective, ReasoningLayer sends HumanState to DisseminationLayer!
 
 //Sistema que alerta os responsaveis!
-From the Alert perspective, AlertSystem sends HumanState to Caretaker!
 //From the top perspective, AlertSystem sends HumanState to EmergencySystem!
+From the Alert perspective, DisseminationLayer sends HumanState to AlertSystem!
+From the Alert perspective, AlertSystem sends HumanState to Caretaker!
+//From the top perspective, DisseminationLayer sends HumanState to EmergencySystem!
+
 
 //Sistema de emergencia!
 From the Emergency perspective, EmergencySystem sends HumanState to Helpcenter!

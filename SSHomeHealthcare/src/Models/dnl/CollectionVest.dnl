@@ -20,7 +20,7 @@ generates output on Temperature with type Temperature!
 Initialize variables
 <%
 humanAxis = new Axis();
-measuredTemp = new Temperature(new Float(0));
+measuredTemp = new Temperature(0);
 %>! 
 
 //Maquina de Estados!

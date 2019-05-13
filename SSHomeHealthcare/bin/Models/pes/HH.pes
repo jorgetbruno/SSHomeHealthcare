@@ -1,0 +1,4 @@
+set name of model as HH !
+pruned from HH.ses !
+mergeAll from HH.ses !
+write class files !

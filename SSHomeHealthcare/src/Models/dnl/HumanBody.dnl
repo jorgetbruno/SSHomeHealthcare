@@ -14,15 +14,11 @@ use humanAxis with type Axis!
 generates output on Temperature with type Temperature!
 generates output on Axis with type Axis!
 
-
 //Inicialização de Variáveis!
 Internal event for s0
 <%
-float max = 44;
-float min = 35;
-java.util.Random gerador = new java.util.Random();
-float numero1 = gerador.nextFloat() * (max - min) + min;
-CurrentTemp = new Temperature(numero1);
+
+CurrentTemp = new Temperature(new Float(50));
 %>!
 
 Internal event for s2

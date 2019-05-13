@@ -1,55 +1,37 @@
 //Declaração de tipos de dados!
 A Temperature has a value!
 the range of Temperature's value is Float!
-A Axis has a value!
-the range of Axis's value is Integer!
 
 //Variável de instância respectiva!
-use humanAxis with type Axis!
 use measuredTemp with type Temperature!
 
 //Porta de entrada!
-accepts input on Axis with type Axis!
 accepts input on Temperature with type Temperature!
 //enrivonment!
 //sense!
 //Porta de saida!
-generates output on Axis with type Axis!
 generates output on Temperature with type Temperature!
+
 
 Initialize variables
 <%
-humanAxis = new Axis();
-measuredTemp = new Temperature(0);
+measuredTemp = new Temperature(new Float(0));
 %>! 
 
 //Maquina de Estados!
 to start passivate in s0!
 when in s0 and receive Temperature go to s1!
-hold in s1 for time 0!
+hold in s1 for time 1!
 after s1 output Temperature!
-from s1 go to s2!
-passivate in s2!
-when in s2 and receive Axis go to s3!
-hold in s3 for time 0!
-after s3 output Axis!
-from s3 go to s0!
+from s1 go to s0!
 
 //Evento de Entrada!
 external event for s0 with Temperature
 <%
 measuredTemp = (Temperature) messageList.get(0).getData();
 %>!
-external event for s2 with Axis
-<%
-humanAxis = (Axis) messageList.get(0).getData();
-%>!
 //On the transition going out from the state,perform the actions
 output event for s1
 <%
 output.add(outTemperature, measuredTemp);
-%>!
-output event for s3
-<%
-output.add(outAxis, humanAxis);
 %>!

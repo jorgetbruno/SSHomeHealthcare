@@ -36,21 +36,10 @@ from s1 go to s0!
 //Evento de Entrada!
 external event for s0 with HumanData
 <%
-boolean fever;
-estructuredData = (HumanData) messageList.get(0).getData();
-if(estructuredData.getValue() > 40){
-	personState = new HumanState(new Integer(1));
-	fever = true;
-}else{
-	personState = new HumanState(new Integer(0));
-	fever = false;
-}
 
-if (prevState.isValue() == fever){
-	holdIn("s0", 1000.0000);	
-}else{
-	prevState = new PreviousState(fever);	
-}
+estructuredData = (HumanData) messageList.get(0).getData();
+
+	personState = new HumanState(new Integer(0));
 
 %>!
 //On the transition going out from the state,perform the actions
