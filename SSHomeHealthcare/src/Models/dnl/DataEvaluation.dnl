@@ -30,7 +30,7 @@ external event for s0 with HumanData
 <%
 
 estructuredData = (HumanData) messageList.get(0).getData();
-personState.setValue(new Float(estructuredData.getX()).intValue());
+personState.setValue(estructuredData.getX());
 %>!
 //On the transition going out from the state,perform the actions
 output event for s1

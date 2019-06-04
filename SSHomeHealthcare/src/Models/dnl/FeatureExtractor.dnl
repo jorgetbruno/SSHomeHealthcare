@@ -1,3 +1,9 @@
+//Declaração de tipos de dados!
+A AccInfo has a X, Y and Z!
+the range of AccInfo's X is Float!
+the range of AccInfo's Y is Float!
+the range of AccInfo's Z is Float!
+
 //Variável de instância respectiva!
 use accData with type AccInfo!
 use estructuredData with type HumanData!

@@ -26,14 +26,6 @@ when in s2 and receive DistressSignal go to s3!
 hold in s3 for time 1!
 from s3 go to s0!
 
-internal event for s0
-<%
-if (personState.getValue() != 3){
-	passivateIn("passive");
-}
-
-%>!
-
 //Evento de Entrada!
 external event for s0 with HumanState
 <%

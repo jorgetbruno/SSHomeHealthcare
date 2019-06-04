@@ -1,37 +1,39 @@
 //Declaração de tipos de dados!
-A Temperature has a value!
-the range of Temperature's value is Float!
+A AccInfo has a X, Y and Z!
+the range of AccInfo's X is Float!
+the range of AccInfo's Y is Float!
+the range of AccInfo's Z is Float!
 
 //Variável de instância respectiva!
-use measuredTemp with type GyroInfo!
+use accData with type AccInfo!
 
 //Porta de entrada!
-accepts input on GyroInfo with type GyroInfo!
+accepts input on AccInfo with type AccInfo!
 //enrivonment!
 //sense!
 //Porta de saida!
-generates output on GyroInfo with type GyroInfo!
+generates output on AccInfo with type AccInfo!
 
 
 Initialize variables
 <%
-measuredTemp = new GyroInfo(new Float(0), new Float(0));
+accData = new AccInfo();
 %>! 
 
 //Maquina de Estados!
 to start passivate in s0!
-when in s0 and receive GyroInfo go to s1!
+when in s0 and receive AccInfo go to s1!
 hold in s1 for time 1!
-after s1 output GyroInfo!
+after s1 output AccInfo!
 from s1 go to s0!
 
 //Evento de Entrada!
-external event for s0 with GyroInfo
+external event for s0 with AccInfo
 <%
-measuredTemp = (GyroInfo) messageList.get(0).getData();
+accData = (AccInfo) messageList.get(0).getData();
 %>!
 //On the transition going out from the state,perform the actions
 output event for s1
 <%
-output.add(outGyroInfo, measuredTemp);
+output.add(outAccInfo, accData);
 %>!

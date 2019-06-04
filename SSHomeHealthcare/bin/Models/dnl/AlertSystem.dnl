@@ -26,6 +26,12 @@ external event for s0 with HumanState
 <%
 personState = (HumanState) messageList.get(0).getData();
 distress = new DistressSignal(0);
+
+if (personState.getValue() != 3){
+	passivateIn("s0");
+}
+
+
 %>!
 //On the transition going out from the state,perform the actions
 output event for s1

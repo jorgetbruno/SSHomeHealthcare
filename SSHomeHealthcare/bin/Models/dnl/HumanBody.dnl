@@ -25,7 +25,7 @@ use csvDivisor with type String!
 Initialize variables
 <%
 	 info = new AccInfo();
-	 csvFile = "C:/Users/jorge/Documents/falldeteciton.csv";
+	 csvFile = "C:/Users/jorge/Documents/ss/falldeteciton.csv";
      br = null;
      line = "";
      csvDivisor = ",";
@@ -73,7 +73,7 @@ to start hold in s0 for time 1!
 from s0 go to s1!
 hold in s1 for time 1!
 after s1 output AccInfo!
-from s1 go to s1!
+from s1 go to s0!
 
 
 //Evento de Saida!
