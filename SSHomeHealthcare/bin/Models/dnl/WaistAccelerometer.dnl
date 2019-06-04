@@ -1,0 +1,33 @@
+//Variável de instância respectiva!
+use accData with type AccInfo!
+
+//Porta de entrada!
+accepts input on AccInfo with type AccInfo!
+//enrivonment!
+//sense!
+//Porta de saida!
+generates output on AccInfo with type AccInfo!
+
+
+Initialize variables
+<%
+accData = new AccInfo();
+%>! 
+
+//Maquina de Estados!
+to start passivate in s0!
+when in s0 and receive AccInfo go to s1!
+hold in s1 for time 1!
+after s1 output AccInfo!
+from s1 go to s0!
+
+//Evento de Entrada!
+external event for s0 with AccInfo
+<%
+accData = (AccInfo) messageList.get(0).getData();
+%>!
+//On the transition going out from the state,perform the actions
+output event for s1
+<%
+output.add(outAccInfo, accData);
+%>!

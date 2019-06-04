@@ -1,34 +1,30 @@
-//Declaração de tipos de dados!
-A HumanState has a value!
-the range of HumanState's value is Integer!
-
 //Variável de instância respectiva!
-use distress with type HumanState!
+use distress with type DistressSignal!
 
 //Porta de entrada!
-accepts input on HumanState with type HumanState!
+accepts input on DistressSignal with type DistressSignal!
 //enrivonment!
 //sense!
 //Porta de saida!
-generates output on HumanState with type HumanState!
+generates output on DistressSignal with type DistressSignal!
 
 
 //Maquina de Estados!
 to start passivate in s0!
-when in s0 and receive HumanState go to s1!
+when in s0 and receive DistressSignal go to s1!
 hold in s1 for time 1!
-after s1 output HumanState!
+after s1 output DistressSignal!
 from s1 go to s0!
 
 //Evento de Entrada!
-external event for s0 with HumanState
+external event for s0 with DistressSignal
 <%
 
-distress = (HumanState) messageList.get(0).getData();
+distress = (DistressSignal) messageList.get(0).getData();
 
 %>!
 //On the transition going out from the state,perform the actions
 output event for s1
 <%
-output.add(outHumanState, distress);
+output.add(outDistressSignal, distress);
 %>!

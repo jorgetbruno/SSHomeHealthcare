@@ -12,22 +12,23 @@ use distress with type DistressSignal!
 accepts input on HumanState with type HumanState!
 
 //Porta de saida!
-generates output on HumanState with type HumanState!
+generates output on DistressSignal with type DistressSignal!
 
 //Maquina de Estados!
 to start passivate in s0!
 when in s0 and receive HumanState go to s1!
 hold in s1 for time 1!
-after s1 output HumanState!
+after s1 output DistressSignal!
 from s1 go to s0!
 
 //Evento de Entrada!
 external event for s0 with HumanState
 <%
 personState = (HumanState) messageList.get(0).getData();
+distress = new DistressSignal(0);
 %>!
 //On the transition going out from the state,perform the actions
 output event for s1
 <%
-output.add(outHumanState, personState);
+output.add(outDistressSignal, distress);
 %>!

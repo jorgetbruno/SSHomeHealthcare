@@ -1,49 +1,85 @@
-//Declaração de tipos de dados!
-A Temperature has a value!
-the range of Temperature's value is Float!
+add library <%
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+ %>!
 
 //Declaração de tipos de dados!
-A Axis has a value!
-the range of Axis's value is Integer!
+A AccInfo has a X, Y and Z!
+the range of AccInfo's X is Float!
+the range of AccInfo's Y is Float!
+the range of AccInfo's Z is Float!
+
 
 //Variável de instância respectiva!
-use CurrentTemp with type Temperature!
-use humanAxis with type Axis!
+use info with type AccInfo!
+use csvFile with type String!
+use br with type BufferedReader!
+use line with type String!
+use csvDivisor with type String!
 
-//Porta de saida!
-generates output on Temperature with type Temperature!
-generates output on Axis with type Axis!
+
 
 //Inicialização de Variáveis!
-Internal event for s0
+Initialize variables
 <%
+	 info = new AccInfo();
+	 csvFile = "C:/Users/jorge/Documents/falldeteciton.csv";
+     br = null;
+     line = "";
+     csvDivisor = ",";
+     try {
+	     br = new BufferedReader(new FileReader(csvFile));
+	     line = br.readLine();
+     } catch (Exception e) {
+	        e.printStackTrace();
+        
+    } 
+%>! 
 
-CurrentTemp = new Temperature(new Float(50));
-%>!
-
-Internal event for s2
+Internal event for s1
 <%
-humanAxis = new Axis(0);
+try {
+        if ((line = br.readLine()) != null) {
+
+         String[] column = line.split(csvDivisor);
+                                 
+         info.setX(Float.parseFloat(column[0]));
+         info.setY(Float.parseFloat(column[0]));
+         info.setZ(Float.parseFloat(column[0]));
+         
+         System.out.println(info.toString());
+
+        }else {
+        if (br != null) {
+            try {
+                br.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
+    } 
 %>!
 
 //Maquina de estados!
 to start hold in s0 for time 1!
 from s0 go to s1!
 hold in s1 for time 1!
-after s1 output Temperature!
-from s1 go to s2!
-hold in s2 for time 1!
-after s2 output Axis!
-from s2 go to s1!
+after s1 output AccInfo!
+from s1 go to s1!
+
 
 //Evento de Saida!
 //On the transition going out from the state s0, perform the actions!
 output event for s1
 <%
-output.add(outTemperature, CurrentTemp);
+output.add(outAccInfo, info);
 %>!
 
-output event for s2
-<%
-output.add(outAxis, humanAxis);
-%>!

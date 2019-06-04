@@ -1,17 +1,10 @@
-//Declaração de tipos de dados!
-A HumanData has a value!
-the range of HumanData's value is Float!
-
-A HumanState has a value!
-the range of HumanState's value is Integer!
-
-A PreviousState has a value!
-the range of PreviousState's value is Boolean!
+add library <%
+import java.lang.Math;
+ %>!
 
 //Variável de instância respectiva!
 use estructuredData with type HumanData!
 use personState with type HumanState!
-use prevState with type PreviousState!
 
 //Porta de entrada!
 accepts input on HumanData with type HumanData!
@@ -22,8 +15,7 @@ generates output on HumanState with type HumanState!
 
 Initialize variables
 <%
-personState = new HumanState(new Integer(0));
-prevState = new PreviousState(false);
+personState = new HumanState();
 %>! 
 
 //Maquina de Estados!
@@ -38,9 +30,7 @@ external event for s0 with HumanData
 <%
 
 estructuredData = (HumanData) messageList.get(0).getData();
-
-	personState = new HumanState(new Integer(0));
-
+personState.setValue(new Float(estructuredData.getX()).intValue());
 %>!
 //On the transition going out from the state,perform the actions
 output event for s1

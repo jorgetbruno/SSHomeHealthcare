@@ -13,21 +13,44 @@ accepts input on HumanState with type HumanState!
 
 //Porta de saida!
 generates output on HumanState with type HumanState!
+generates output on DistressSignal with type DistressSignal!
 
 //Maquina de Estados!
 to start passivate in s0!
 when in s0 and receive HumanState go to s1!
 hold in s1 for time 1!
 after s1 output HumanState!
-from s1 go to s0!
+from s1 go to s2!
+passivate in s2!
+when in s2 and receive DistressSignal go to s3!
+hold in s3 for time 1!
+from s3 go to s0!
+
+internal event for s0
+<%
+if (personState.getValue() != 3){
+	passivateIn("passive");
+}
+
+%>!
 
 //Evento de Entrada!
 external event for s0 with HumanState
 <%
 personState = (HumanState) messageList.get(0).getData();
+
+%>!
+//Evento de Entrada!
+external event for s2 with DistressSignal
+<%
+distress = (DistressSignal) messageList.get(0).getData();
 %>!
 //On the transition going out from the state,perform the actions
 output event for s1
 <%
 output.add(outHumanState, personState);
+%>!
+output event for s3
+<%
+output.add(outDistressSignal, distress);
 %>!

@@ -1,26 +1,17 @@
-//Declaração de tipos de dados!
-A HumanState has a value!
-the range of HumanState's value is Integer!
-
 //Variável de instância respectiva!
-use personState with type HumanState!
+use personState with type DistressSignal!
 
 //Porta de entrada!
-accepts input on HumanState with type HumanState!
-
-Initialize variables
-<%
-personState = new HumanState(new Integer(0));
-%>! 
+accepts input on DistressSignal with type DistressSignal!
 
 //Maquina de Estados!
 to start passivate in s0!
-when in s0 and receive HumanState go to s1!
+when in s0 and receive DistressSignal go to s1!
 hold in s1 for time 1!
 from s1 go to s0!
 
 //Evento de Entrada!
-external event for s0 with HumanState
+external event for s0 with DistressSignal
 <%
-personState = (HumanState) messageList.get(0).getData();
+personState = (DistressSignal) messageList.get(0).getData();
 %>!

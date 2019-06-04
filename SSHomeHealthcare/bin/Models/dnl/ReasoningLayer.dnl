@@ -1,9 +1,6 @@
 //Declaração de tipos de dados!
-A HumanData has a value!
-the range of HumanData's value is Float!
-
 A HumanState has a value!
-the range of HumanState's value is Integer!
+the range of HumanState's value is Float!
 
 //Variável de instância respectiva!
 use estructuredData with type HumanData!
@@ -26,26 +23,24 @@ hold in s1 for time 1!
 after s1 output HumanData!
 from s1 go to s2!
 passivate in s2!
-when in s2 and receive HumanData go to s3!
-passivate in s3!
-when in s3 and receive HumanState go to s4!
-hold in s4 for time 1!
-after s4 output HumanState!
-from s4 go to s0!
+when in s2 and receive HumanState go to s3!
+hold in s3 for time 1!
+after s3 output HumanState!
+from s3 go to s0!
 
 //Evento de Entrada!
 external event for s0 with HumanData
 <%
 estructuredData = (HumanData) messageList.get(0).getData();
 %>!
-external event for s4 with HumanState
+external event for s2 with HumanState
 <%
-temporaryState = (HumanState) messageList.get(0).getData();
-if(temporaryState.getValue() < 36.6){
+personState = (HumanState) messageList.get(0).getData();
+
+
+if(personState.getValue() < 36.6){
 	 passivateIn("s0");
 }
-
-personState = temporaryState;
 
 %>!
 //On the transition going out from the state,perform the actions
@@ -53,7 +48,7 @@ output event for s1
 <%
 output.add(outHumanData, estructuredData);
 %>!
-output event for s4
+output event for s3
 <%
 output.add(outHumanState, personState);
 %>!
