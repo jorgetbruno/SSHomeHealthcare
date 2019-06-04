@@ -45,11 +45,7 @@ try {
 
          String[] column = line.split(csvDivisor);
                                  
-         info.setX(Float.parseFloat(column[0]));
-         info.setY(Float.parseFloat(column[0]));
-         info.setZ(Float.parseFloat(column[0]));
-         
-         System.out.println(info.toString());
+         info = new AccInfo(Float.parseFloat(column[0]), Float.parseFloat(column[0]), Float.parseFloat(column[0]));
 
         }else {
         if (br != null) {
@@ -71,14 +67,16 @@ try {
 //Maquina de estados!
 to start hold in s0 for time 1!
 from s0 go to s1!
-hold in s1 for time 1!
-after s1 output AccInfo!
-from s1 go to s0!
+hold in s1 for time 0.5!
+from s1 go to s2!
+hold in s2 for time 0.5!
+after s2 output AccInfo!
+from s2 go to s1!
 
 
 //Evento de Saida!
 //On the transition going out from the state s0, perform the actions!
-output event for s1
+output event for s2
 <%
 output.add(outAccInfo, info);
 %>!
