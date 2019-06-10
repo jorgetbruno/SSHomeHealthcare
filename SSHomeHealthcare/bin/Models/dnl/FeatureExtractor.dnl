@@ -7,9 +7,12 @@ the range of AccInfo's Z is Float!
 //Variável de instância respectiva!
 use accData with type AccInfo!
 use estructuredData with type HumanData!
+use radarData with type RadarInfo!
 
 //Porta de entrada!
 accepts input on AccInfo with type AccInfo!
+accepts input on RadarInfo with type RadarInfo!
+
 //enrivonment!
 //sense!
 //Porta de saida!
@@ -24,8 +27,12 @@ estructuredData = new HumanData();
 to start passivate in s0!
 when in s0 and receive AccInfo go to s1!
 hold in s1 for time 1!
-after s1 output HumanData!
-from s1 go to s0!
+from s1 go to s2!
+passivate in s2!
+when in s2 and receive RadarInfo go to s3!
+hold in s3 for time 1!
+after s3 output HumanData!
+from s3 go to s0!
 
 //Evento de Entrada!
 external event for s0 with AccInfo
@@ -37,8 +44,18 @@ estructuredData.setX(accData.getX());
 estructuredData.setZ(accData.getZ());
 
 %>!
+
+external event for s2 with RadarInfo
+<%
+radarData = (RadarInfo) messageList.get(0).getData();
+
+estructuredData.setSpeed(radarData.getSpeed());
+estructuredData.setDistance(radarData.getDistance());
+
+%>!
+
 //On the transition going out from the state,perform the actions
-output event for s1
+output event for s3
 <%
 output.add(outHumanData, estructuredData);
 %>!

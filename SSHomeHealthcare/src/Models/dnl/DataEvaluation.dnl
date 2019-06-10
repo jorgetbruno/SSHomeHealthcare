@@ -1,7 +1,3 @@
-add library <%
-import java.lang.Math;
- %>!
-
 //Variável de instância respectiva!
 use estructuredData with type HumanData!
 use personState with type HumanState!
@@ -31,6 +27,11 @@ external event for s0 with HumanData
 
 estructuredData = (HumanData) messageList.get(0).getData();
 personState.setValue(estructuredData.getX());
+
+if (estructuredData.getDistance() == 3.0){
+	personState.setValue(estructuredData.getDistance());
+}
+
 %>!
 //On the transition going out from the state,perform the actions
 output event for s1

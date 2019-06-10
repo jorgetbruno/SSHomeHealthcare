@@ -25,7 +25,7 @@ from s1 go to s0!
 external event for s0 with HumanState
 <%
 personState = (HumanState) messageList.get(0).getData();
-distress = new DistressSignal(0);
+distress = new DistressSignal(1);
 
 if (personState.getValue() != 3){
 	passivateIn("s0");

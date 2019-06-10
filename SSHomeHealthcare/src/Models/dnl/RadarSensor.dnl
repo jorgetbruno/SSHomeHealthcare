@@ -1,0 +1,39 @@
+//Declaração de tipos de dados!
+A RadarInfo has a speed and distance!
+the range of RadarInfo's speed is Float!
+the range of RadarInfo's distance is Float!
+
+
+//Variável de instância respectiva!
+use radarData with type RadarInfo!
+
+//Porta de entrada!
+accepts input on RadarInfo with type RadarInfo!
+//enrivonment!
+//sense!
+//Porta de saida!
+generates output on RadarInfo with type RadarInfo!
+
+Initialize variables
+<%
+radarData = new RadarInfo();
+%>! 
+
+//Maquina de Estados!
+to start passivate in s0!
+when in s0 and receive RadarInfo go to s1!
+hold in s1 for time 1!
+after s1 output RadarInfo!
+from s1 go to s0!
+
+//Evento de Entrada!
+external event for s0 with RadarInfo
+<%
+radarData = (RadarInfo) messageList.get(0).getData();
+%>!
+
+//On the transition going out from the state,perform the actions
+output event for s1
+<%
+output.add(outRadarInfo, radarData);
+%>!

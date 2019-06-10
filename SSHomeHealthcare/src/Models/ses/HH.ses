@@ -1,8 +1,9 @@
 From the top perspective, HH is made of AcquisitionLayer, ModelingLayer, ReasoningLayer,  DisseminationLayer, and EmergencySystem!
 
 //Composicao do Sistema em diferentes perspectivas!
-From the Acquisition perspective, AcquisitionLayer is made of HumanBody and CollectionVest!
+From the Acquisition perspective, AcquisitionLayer is made of HumanBody, RadarModule, and CollectionVest!
 From the Collection perspective, CollectionVest is made of WaistAccelerometer and Gateway!
+From the Radar perspective, RadarModule is made of RadarSensor and RadarGateway!
 From the DataStructure perspective, ModelingLayer is made of FeatureExtractor!
 From the DataInterpretation perspective, ReasoningLayer is made of DataEvaluation!
 From the Alert perspective, DisseminationLayer is made of AlertSystem and Caretaker!
@@ -17,8 +18,16 @@ From the Collection perspective, Gateway sends AccInfo to CollectionVest!
 From the Acquisition perspective, CollectionVest sends AccInfo to AcquisitionLayer!
 From the top perspective, AcquisitionLayer sends AccInfo to ModelingLayer!
 
+From the Acquisition perspective, HumanBody sends RadarInfo to RadarModule!
+From the Radar perspective, RadarModule sends RadarInfo to RadarSensor!
+From the Radar perspective, RadarSensor sends RadarInfo to RadarGateway!
+From the Radar perspective, RadarGateway sends RadarInfo to RadarModule!
+From the Acquisition perspective, RadarModule sends RadarInfo to AcquisitionLayer!
+From the top perspective, AcquisitionLayer sends RadarInfo to ModelingLayer!
+
 //Sistema que estrutura as informações!
 From the DataStructure perspective, ModelingLayer sends AccInfo to FeatureExtractor!
+From the DataStructure perspective, ModelingLayer sends RadarInfo to FeatureExtractor!
 From the DataStructure perspective, FeatureExtractor sends HumanData to ModelingLayer!
 From the top perspective, ModelingLayer sends HumanData to ReasoningLayer!
 

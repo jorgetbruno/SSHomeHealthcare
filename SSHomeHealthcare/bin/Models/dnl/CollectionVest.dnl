@@ -19,12 +19,11 @@ Initialize variables
 AccData = new AccInfo();
 %>! 
 
-
 //Maquina de Estados!
 to start passivate in s0!
 when in s0 and receive AccInfo go to s1!
 hold in s1 for time 0!
-after s1 output GyroInfo!
+after s1 output AccInfo!
 from s1 go to s0!
 
 //Evento de Entrada!
